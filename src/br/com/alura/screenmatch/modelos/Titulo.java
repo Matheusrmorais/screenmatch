@@ -2,7 +2,7 @@ package br.com.alura.screenmatch.modelos;
 
 import br.com.alura.screenmatch.calculos.Classificavel;
 
-public class Titulo   {
+public class Titulo implements Comparable<Titulo>  {
 
     private String nome;
     private int anoDeLancamento;
@@ -66,4 +66,8 @@ public class Titulo   {
         return somaDasAvaliacoes / totalDeAvaliacoes;
     }
 
+    @Override
+    public int compareTo(Titulo outroTitulo) {
+        return this.getNome().compareTo(outroTitulo.getNome());
+    }
 }
