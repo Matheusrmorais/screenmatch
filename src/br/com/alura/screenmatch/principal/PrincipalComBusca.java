@@ -6,7 +6,9 @@ import br.com.alura.screenmatch.modelos.TituloOmdb;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import io.github.cdimascio.dotenv.Dotenv;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URLEncoder;
@@ -23,8 +25,14 @@ public class PrincipalComBusca {
 
         String buscaCodificada = URLEncoder.encode(buscar, "UTF-8");
 
+        Dotenv env = Dotenv.load();
+        var apiKey = env.get("API_KEY");
+        var apiUrl = env.get("API_URL");
 
-        String endereco = "http://www.omdbapi.com/?t=" + buscaCodificada + "&apikey=";
+
+
+
+        String endereco = apiUrl + buscaCodificada + "&apikey=" + apiKey;
         try {
 
 
@@ -50,6 +58,9 @@ public class PrincipalComBusca {
             Titulo meuTitutlo = new Titulo(meuTitutloOmdb);
             System.out.println("Titulo convertido");
             System.out.println(meuTitutlo);
+            FileWriter escrita = new FileWriter("filmes.txt");
+            escrita.write(meuTitutlo.toString());
+            escrita.close();
         } catch (NumberFormatException e) {
             System.out.println("Aconteceu um erro: ");
             System.out.println(e.getMessage());
@@ -64,7 +75,6 @@ public class PrincipalComBusca {
         finally {
             System.out.println("O Programa finalizou corretamente.");
         }
-
 
 
 
