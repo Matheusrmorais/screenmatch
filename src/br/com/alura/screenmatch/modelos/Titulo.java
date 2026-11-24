@@ -26,7 +26,7 @@ public class Titulo implements Comparable<Titulo>  {
             throw new ErrorDeConversaoDeAnoException("Não consegui converter o ano porque tem mais de 4 caracteres.");
         }
         this.anoDeLancamento = Integer.parseInt(meuTitutloOmdb.year());
-        this.duracaoEmMinutos = Integer.parseInt(meuTitutloOmdb.runtime().substring(0, 3));
+        this.duracaoEmMinutos = Integer.parseInt(meuTitutloOmdb.runtime().substring(0, 2));
     }
 
     public String getNome() {
